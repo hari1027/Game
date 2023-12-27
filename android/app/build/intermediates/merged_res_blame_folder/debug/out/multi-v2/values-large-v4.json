@@ -1,7 +1,7 @@
 {
     "logs": [
         {
-            "outputFile": "com.game.app-mergeDebugResources-31:/values-large-v4/values-large-v4.xml",
+            "outputFile": "com.game.app-mergeDebugResources-30:/values-large-v4/values-large-v4.xml",
             "map": [
                 {
                     "source": "C:\\Users\\Hariharan\\.gradle\\caches\\transforms-3\\293c3acbc852612c65ac823702e5e293\\transformed\\material-1.4.0\\res\\values-large-v4\\values-large-v4.xml",

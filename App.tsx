@@ -1,12 +1,14 @@
-import React from 'react'
-import { AppwriteProvider } from './LoginComponents/appwrite/AppwriteContext'
-import { Router } from './LoginComponents/routes/Router'
+import React, { useEffect } from 'react'
+import HomePage from './GameComponents/HomePage'
+import Orientation from 'react-native-orientation-locker';
 
 const App = () => {
+    useEffect(() => {
+        Orientation.lockToLandscape()
+    }, [])
+
     return (
-        <AppwriteProvider>
-            <Router />
-        </AppwriteProvider>
+        <HomePage />
     )
 }
 

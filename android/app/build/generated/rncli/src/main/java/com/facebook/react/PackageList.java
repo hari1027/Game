@@ -17,8 +17,6 @@ import com.lugg.RNCConfig.RNCConfigPackage;
 import org.wonday.orientation.OrientationPackage;
 // react-native-safe-area-context
 import com.th3rdwave.safeareacontext.SafeAreaContextPackage;
-// react-native-screens
-import com.swmansion.rnscreens.RNScreensPackage;
 // react-native-snackbar
 import com.azendoo.reactnativesnackbar.SnackbarPackage;
 // react-native-vector-icons
@@ -71,7 +69,6 @@ public class PackageList {
       new RNCConfigPackage(),
       new OrientationPackage(),
       new SafeAreaContextPackage(),
-      new RNScreensPackage(),
       new SnackbarPackage(),
       new VectorIconsPackage()
     ));

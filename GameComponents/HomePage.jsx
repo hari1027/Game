@@ -7,7 +7,6 @@ import heartImage from './heart.jpg'
 import { Dimensions } from 'react-native'
 import Snackbar from 'react-native-snackbar'
 import { NavigationContainer } from '@react-navigation/native'
-import { AppwriteContext } from '../LoginComponents/appwrite/AppwriteContext'
 import Orientation from 'react-native-orientation-locker'
 import axios from 'axios'
 import Modal from 'react-native-modal'
@@ -38,7 +37,6 @@ export default function HomePage() {
     const [screenHeight, setScreenHeight] = useState(Dimensions.get('window').height);
     const { theme } = useTheme();
     const [websocketConnected, setWebsocketConnected] = useState(false);
-    const { appwrite, setIsLoggedIn } = useContext(AppwriteContext);
 
     let gamesList = ["Memory", "Ace", "JackAndFive"];
     const [createRoom, setCreateRoom] = useState(false);
@@ -1336,11 +1334,6 @@ export default function HomePage() {
     }, []);
 
     const handleLogout = () => {
-        appwrite.logout()
-            .then(() => {
-                setIsLoggedIn(false);
-                Orientation.lockToPortrait();
-            })
     };
 
     const handleExit = () => {
