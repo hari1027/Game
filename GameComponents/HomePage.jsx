@@ -78,7 +78,7 @@ export default function HomePage() {
     };
 
     // Establish a WebSocket connection when the component mounts
-    const ws = new WebSocket('ws://10.0.2.2:4000');
+    const ws = new WebSocket('ws://13.71.92.130:5000');
 
     const minorSpades = ["2 of Spades", "3 of Spades", "4 of Spades", "5 of Spades", "6 of Spades", "7 of Spades"];
     const majorSpades = ["9 of Spades", "10 of Spades", "Jack of Spades", "Queen of Spades", "King of Spades", "Ace of Spades"];
@@ -1364,7 +1364,7 @@ export default function HomePage() {
     };
 
     const fetchParticipants = async (id) => {
-        await axios.get(`http://10.0.2.2:5000/get-participants/${id}`)
+        await axios.get(`http://13.71.92.130:5000/get-participants/${id}`)
             .then(response => {
                 const participants = response.data;
                 setParticipants(participants);
@@ -1377,14 +1377,14 @@ export default function HomePage() {
 
     const createRoomServer = async () => {
         try {
-            const response = await axios.post('http://10.0.2.2:5000/create-room');
+            const response = await axios.post('http://13.71.92.130:5000/create-room');
             if (response.data.roomId) {
                 roomId = response.data.roomId;
                 setMessage(`RoomId : ${response.data.roomId}`);
                 try {
                     name = "host"
                     if (roomId !== '') {
-                        const resp = await axios.post('http://10.0.2.2:5000/join-room', { roomId, name })
+                        const resp = await axios.post('http://13.71.92.130:5000/join-room', { roomId, name })
                         if (resp.status === 200) {
                             setCreateRoom(true);
                         }
@@ -1416,7 +1416,7 @@ export default function HomePage() {
         }
 
         else if (roomId !== '') {
-            const response = await axios.get(`http://10.0.2.2:5000/get-participants/${roomId}`);
+            const response = await axios.get(`http://13.71.92.130:5000/get-participants/${roomId}`);
             if (response.data) {
                 let members = response.data
                 if (name === '') {
@@ -1456,7 +1456,7 @@ export default function HomePage() {
                 }
                 else {
                     try {
-                        const response = await axios.post('http://10.0.2.2:5000/join-room', { roomId, name });
+                        const response = await axios.post('http://13.71.92.130:5000/join-room', { roomId, name });
                         if (response.status === 200) {
                             setJoinedRoom(true);
                             setMessage('Joined room successfully');
@@ -1478,7 +1478,7 @@ export default function HomePage() {
     const leaveRoomServer = async () => {
         try {
             type = "leave"
-            const response = await axios.post('http://10.0.2.2:5000/leave-room', { roomId, name, type });
+            const response = await axios.post('http://13.71.92.130:5000/leave-room', { roomId, name, type });
             if (response.status === 200) {
                 setJoinRoom(false);
                 setJoinedRoom(false);
@@ -1516,7 +1516,7 @@ export default function HomePage() {
             try {
                 let name = playerToBeKicked
                 type = "kick"
-                const response = await axios.post('http://10.0.2.2:5000/leave-room', { roomId, name, type });
+                const response = await axios.post('http://13.71.92.130:5000/leave-room', { roomId, name, type });
                 if (response.status === 200) {
                     setPlayerToBeKicked('');
                     setModalVisible(!isModalVisible);
@@ -1540,7 +1540,7 @@ export default function HomePage() {
 
     const deleteRoom = async () => {
         try {
-            const response = await axios.delete(`http://10.0.2.2:5000/delete-room/${roomId}`)
+            const response = await axios.delete(`http://13.71.92.130:5000/delete-room/${roomId}`)
             setActiveGameTab(null);
             gameSelected = '';
         }
