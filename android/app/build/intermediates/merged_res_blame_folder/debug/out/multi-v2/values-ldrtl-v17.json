@@ -4,7 +4,22 @@
             "outputFile": "com.game.app-mergeDebugResources-30:/values-ldrtl-v17/values-ldrtl-v17.xml",
             "map": [
                 {
-                    "source": "C:\\Users\\Hariharan\\.gradle\\caches\\transforms-3\\293c3acbc852612c65ac823702e5e293\\transformed\\material-1.4.0\\res\\values-ldrtl-v17\\values-ldrtl-v17.xml",
+                    "source": "C:\\Users\\hariharan.n\\.gradle\\caches\\transforms-3\\293c3acbc852612c65ac823702e5e293\\transformed\\material-1.4.0\\res\\values-ldrtl-v17\\values-ldrtl-v17.xml",
+                    "from": {
+                        "startLines": "2,3",
+                        "startColumns": "4,4",
+                        "startOffsets": "55,191",
+                        "endColumns": "135,140",
+                        "endOffsets": "186,327"
+                    }
+                }
+            ]
+        },
+        {
+            "outputFile": "C:\\Users\\hariharan.n\\.gradle\\daemon\\8.0.1\\com.game.app-mergeDebugResources-30:\\values-ldrtl-v17\\values-ldrtl-v17.xml",
+            "map": [
+                {
+                    "source": "C:\\Users\\hariharan.n\\.gradle\\caches\\transforms-3\\293c3acbc852612c65ac823702e5e293\\transformed\\material-1.4.0\\res\\values-ldrtl-v17\\values-ldrtl-v17.xml",
                     "from": {
                         "startLines": "2,3",
                         "startColumns": "4,4",

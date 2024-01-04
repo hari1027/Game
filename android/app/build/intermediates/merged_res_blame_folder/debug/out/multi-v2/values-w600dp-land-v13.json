@@ -4,7 +4,22 @@
             "outputFile": "com.game.app-mergeDebugResources-30:/values-w600dp-land-v13/values-w600dp-land-v13.xml",
             "map": [
                 {
-                    "source": "C:\\Users\\Hariharan\\.gradle\\caches\\transforms-3\\293c3acbc852612c65ac823702e5e293\\transformed\\material-1.4.0\\res\\values-w600dp-land-v13\\values-w600dp-land-v13.xml",
+                    "source": "C:\\Users\\hariharan.n\\.gradle\\caches\\transforms-3\\293c3acbc852612c65ac823702e5e293\\transformed\\material-1.4.0\\res\\values-w600dp-land-v13\\values-w600dp-land-v13.xml",
+                    "from": {
+                        "startLines": "2",
+                        "startColumns": "4",
+                        "startOffsets": "55",
+                        "endColumns": "54",
+                        "endOffsets": "105"
+                    }
+                }
+            ]
+        },
+        {
+            "outputFile": "C:\\Users\\hariharan.n\\.gradle\\daemon\\8.0.1\\com.game.app-mergeDebugResources-30:\\values-w600dp-land-v13\\values-w600dp-land-v13.xml",
+            "map": [
+                {
+                    "source": "C:\\Users\\hariharan.n\\.gradle\\caches\\transforms-3\\293c3acbc852612c65ac823702e5e293\\transformed\\material-1.4.0\\res\\values-w600dp-land-v13\\values-w600dp-land-v13.xml",
                     "from": {
                         "startLines": "2",
                         "startColumns": "4",
