@@ -1,4 +1,26 @@
 {
-    "java.configuration.updateBuildConfiguration": "interactive",
-    "java.compile.nullAnalysis.mode": "automatic"
+    // The number of spaces in a tab.
+    "editor.tabSize": 2,
+    // Specifies workbench icon theme.
+    "workbench.iconTheme": "vscode-icons",
+    // Format a file on save.
+    "editor.formatOnSave": true,
+    // Set Prettier default as formatter
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
+    "[javascript]": {
+        "editor.defaultFormatter": "esbenp.prettier-vscode"
+    },
+    // Controls how the editor should render whitespace characters.
+    "editor.renderWhitespace": "boundary",
+    // Quickly toggle between hiding and showing folders and files. (For Peep)
+    // To quickly hide/show files execute the Peep Toggle in Command Palette.
+    "files.exclude": {
+        ".*": false,
+        "ios/": false,
+        "*.lo*": false,
+        "LICENSE": false,
+        "android/": false,
+        "__tests__": false,
+        "node_modules/": false
+    }
 }

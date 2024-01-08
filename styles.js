@@ -1,3 +1,3 @@
 export const darkTheme = {
-    backgroundColor: '#121212',
+  backgroundColor: '#121212',
 };
