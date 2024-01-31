@@ -10,19 +10,17 @@ import {
   TouchableWithoutFeedback,
   FlatList,
 } from 'react-native';
-import React, {useContext, useState, useEffect} from 'react';
+import React, {useState, useEffect} from 'react';
 import spadeImage from './spade.jpg';
 import clubImage from './club.jpg';
 import diamondImage from './diamond.jpg';
 import heartImage from './heart.jpg';
 import {Dimensions} from 'react-native';
 import Snackbar from 'react-native-snackbar';
-import {NavigationContainer} from '@react-navigation/native';
-import Orientation from 'react-native-orientation-locker';
 import axios from 'axios';
 import Modal from 'react-native-modal';
 import Icon from 'react-native-vector-icons/FontAwesome';
-import {ThemeProvider, useTheme} from '.././ThemeContext';
+import {useTheme} from '.././ThemeContext';
 
 var roomId = '';
 var name = '';
@@ -43,16 +41,75 @@ var gameCompletedOrderList = [];
 var jackandfiveCaptureList = [];
 
 export default function HomePage() {
-  const [screenWidth, setScreenWidth] = useState(
-    Dimensions.get('window').width,
-  );
-  const [screenHeight, setScreenHeight] = useState(
-    Dimensions.get('window').height,
-  );
   const {theme} = useTheme();
-  const [websocketConnected, setWebsocketConnected] = useState(false);
 
   let gamesList = ['Memory', 'Ace', 'JackAndFive'];
+  const MemoryRules = [
+    'This Game Can be Played Exactly with 4 or 6 or 8 palyers only .',
+    'If you Play with 4 players only there is no teams every one is an Individual Player .',
+    'If you Play with 6 or 8 Players 2 Players will be assigned to one team .',
+    'If it is a 6 player Game then there are 3 Teams If it is a 8 Player Game then there are 4 Teams .',
+    'Every Game Consists of 8 Bases . The Player or a Team will be Ordered as 1 2 3 or 4 According to Number of Bases they Captured at the End of The Game .',
+    '8 Bases: From 2 to 7 of Spade is one base , From 9 to A of Spade is one base , From 2 to 7 of Club is one base , From 9 to A of Club is one base , From 2 to 7 of Diamond is one base , From 9 to A of Diamond is one base , From 2 to 7 of Heart is one base , From 9 to A of Heart is one base .',
+    'The card 8 from each Suit will not be in game .',
+    'Host(Room Creator) Will Start The Game .',
+    'A Player can ask a Card to any Player but he should have atleast one card at that base .',
+    "If a player called Hari is asking 5Club to Archu, Hari should have atleast any one of the card between 2 to 7 of Clubs even it can be 5Club also . But he cannot ask without a base card. And If Archu has that Card That Card will be removed from Archu's lot and added to Hari's lot. And Hari can continue asking another card to Archu or any other Player also with the same rules appicable until Hari's attempt is wrong . After Hari's attempted is wrong the next player will have the chance to play with all the same Scenarios . This will carry on in a Cyclic way .",
+    'If an Individual or as a Team if they captured all the seven cards in a base that base has been captured by them and they will be alloted 1 point .',
+    "A Player is consider to be out of the game only if he/she dosen't have any cards left with him .",
+    'All the onGoing Moves like Hari is asking 5Club to Archu and weather his attempt is Success will be announced to all Players .',
+    "If a Player's attempt is Fail the round will be moved to next Player you can identify that the Player's attempt is fail and the card he asked to whom will also be announced .",
+    'EveryOne will be able to see Which Player is Playing and what card he is asking and to whom he is asking .',
+    'You can ask as many cards you can ask to whom ever you want until you get a fail Guess . But for one attempt you can ask one card only .',
+    'A Base is considered to be captured even if you have 2 4 5 and 7 of spades and your TeamMate have rest of the two spades that is 3 and 6 of spades .',
+    "This Game will increase you Memory skills by a lot by remembering who has which card and sometimes if you don't know who has the card you want you have to play a silent game beacause you would have Collected 4 out of 6 cards apart from your base card from different player and suddenly a player with that one card will come and steal all those 5 cards with your base card from you and will capture the round this will happen a lot of times... Sometimes Silence is a key to success .",
+    "Just don't play all your turns for capturing a single base alone just confuse the players by asking for different base of cards rest all players will not come to know in base you have dominant of cards .",
+    'Sometimes in rare cases it is good that you can ask the card you have with yourself to other player so that they will understand that you dont have that card .',
+    'This game is basically like you have to comeout exactly at right moment and just focus on all the calls in which you have a base card beacuse 1 card can bring you 1 full base capture .',
+  ];
+  const AceRules = [
+    'This Game Can be Played with 2 to 8 Players .',
+    'This Game is focused Completly on who is the Ace Called as Losser.',
+    'The card machine will start putting the card from Host(Room Creator) in a Cyclic Manner . Sometimes EveryBody will have same number of cards but the count of cards from on to another player will defer a max by only one card .',
+    'Host(Room Creator) Will Start The Game .',
+    'The Ranking order from high to low is from A k Q J 10 ...... 2',
+    'If a Player is Starting that Round he can put any card he has with him .',
+    'But once that round has been initiated by a player everyone next should continue to put the card in the same symbol with high or low number',
+    "If you dosen't have the suit (Symbol) that was initiated by a player you can cut that round by cutting with any of the card you have at your turn only . And Players next to you in a cyclic path cannot play on that round .",
+    'A round is considered as finished only if for example (5 players are all 5 players have putted cards in that round or if it was cutted by someone Inbetween) . ',
+    'If all Players putted cards in a round the person who put the highest of the rank should start the next round . And all those cards will go out of the game .',
+    'If Someone cuts Inbetween means the person Who has putted the highest rank card of that round should take all cards of that round till the cut has happen including the cut card . And it will be added in his lot',
+    'If a Player Completes all his cards he has escaped from becoming an Ace .',
+    'And atlast while 2 players are playing if both players completes thier respective cards at same round means there is no Ace . Otherwise the last one who is still having cards or card will be named as Ace . ',
+    'This Game will increase you Memory skills a bit And your Smartness a more .',
+  ];
+  const JackAndFiveRules = [
+    'This Game Can be Played with Exactly 4 Players only .',
+    'In This four Players it will splitted into 2 players in each team .',
+    'The Cyclic order is like teamA Player followed by TeamB Player followed by a TeamA Player and followed by a TeamB Player .',
+    'The Team which is having more points at the end of the game is winner .',
+    'This Game is round based game in which all players will contribute one card per round and total of 13 rounds .',
+    'The Team who is capturing the round will be given one point per round . And as per the name of the game suggest Jack and five of all the Suit(Symbol) has a special Power it will be mentioned in following Points .',
+    'The Host(Room Creator) will start the game with any card he has with him .',
+    'The Game will continue in cyclic path',
+    'All The other Players should have to put a card with the same Suit which was Initiated by the first player of that particular round',
+    "If a Player dosen't have any card in the Suit which was initiated by first player of the round he can cut the round with any card he has with him and the round will continue with a same Cyclic path without stopping .",
+    'If EveryOne in that round has putted the same Suit Initiated by the first player of that round the person who has putted largest rank of that suit that team will be awarded 1 point .',
+    'If the round is cutted by only one player that team will be awarded a point , If many Players cut the same round the person who cutted with biggest rank of card will be awarded a point ,  if two or more players cutted with same rank of card the Suit priority from high to low is (Spade ,Club ,Diamond and heart) which means that with a Player cuts a rount with 8Spade and another player cuts the same round with 8Diamond the player who cutted with 8Spade will be awarded a point .',
+    'The Person Who Won the round will Start the next round .',
+    "Now the role of the jacks and five's is crucial in the main aim of your team is to be capturing the jack's and not capturing the five's . ",
+    'For Every jack you capture as a team your team will be awarded +10 points and for every five you capture as a team will be detucted -5 points .',
+    'Sample Scenario for jack capturing : If a Player from A team puts 8 Diamond and Player from B team puts J Diamonds and the next Player from A team puts K Diamonds and next Player from B team puts 3 Diamond means, since that round hase been captured by the player who puts K Diamond that team will be awarded 1 point and since the round he captured has involved J in it that team will be awarded 10 points and he will start the next round which is basic rule . ',
+    "This Same Scenario will be satisfied for five capturing also , if a Player from A team puts 5Spade and Player from B team puts 6Spade and Player from A team does not have any spade below 6 so he is putting kSpade and Player from B team puts 10Spade means , since a Player from team A win's that round that team will be awarded +1 point and the round he captured has 5 in it that team be will detucted -5 points .",
+    'If both Jack and Five scenario involves in a same round they will undergo both this +10 and -5 point System and round capturing point also .',
+    'If the round which got cutted by one or two or more players cotains jack or five or both the same +10 and -5 will be applicable to the team who won that round on the basis of cut rules scenario .',
+    'If You got a cut oppurtunity can cut a round with jack or five also there is no restriction in that .',
+    'So your basic aim to capture the jacks and not to capture the five and play according to the situation of the game smartly .',
+    'The main logic is playing as a team . Sample : If team A player puts 8Heart and team B player put 10Heart and team A player put 4Heart and now if it your turn means even if you have QHeart you need not put as the round is already captured by you teamMate so if you have AnyOther Heart less then 10 but not 5Heart 😁 you can put that . If you not have less than 10 but greater than that only means then no problem you are supposed to put that only as you have Haert .',
+    "Similary you should try to make the 5's capture by Your opponent team and jack's to be captured by your team .",
+    'Play as a Team it will be a fun fill game .',
+  ];
+  const [rulesScreen, setRulesScreen] = useState(false);
   const [createRoom, setCreateRoom] = useState(false);
   const [joinRoom, setJoinRoom] = useState(false);
   const [joinedRoom, setJoinedRoom] = useState(false);
@@ -73,16 +130,10 @@ export default function HomePage() {
   const [roundInfoScreen, setRoundInfoScreen] = useState(false);
   const [fromPerson, setFromPerson] = useState('');
   const [toPerson, setToPerson] = useState('');
-  const [cardAsked, setCardAsked] = useState('');
   const [responseForTheCard, setResponseForTheCard] = useState('');
   const [askedCardRank, setAskedCardRank] = useState('');
   const [askedCardSuit, setAskedCardSuit] = useState('');
   const [endGameScreen, setEndGameScreen] = useState(false);
-
-  const handleDimensionsChange = ({window}) => {
-    setScreenWidth(window.width);
-    setScreenHeight(window.height);
-  };
 
   const toggleKickPlayerDialogModal = () => {
     setModalVisible(!isModalVisible);
@@ -92,7 +143,7 @@ export default function HomePage() {
   };
 
   // Establish a WebSocket connection when the component mounts
-  const ws = new WebSocket('ws://13.71.92.130:5000');
+  const ws = new WebSocket('ws://10.0.2.2:5000');
 
   const minorSpades = [
     '2 of Spades',
@@ -903,22 +954,17 @@ export default function HomePage() {
   }
 
   useEffect(() => {
-    Dimensions.addEventListener('change', handleDimensionsChange);
+    // ws.onopen = event => {
+    //   console.log('WebSocket connection opened:', event);
+    // };
 
-    ws.onopen = event => {
-      console.log('WebSocket connection opened:', event);
-      setWebsocketConnected(true);
-    };
+    // ws.onclose = event => {
+    //   console.log('WebSocket closed:', event);
+    // };
 
-    ws.onclose = event => {
-      console.log('WebSocket closed:', event);
-      setWebsocketConnected(false);
-    };
-
-    ws.onerror = event => {
-      console.log('WebSocket error:', event);
-      setWebsocketConnected(false);
-    };
+    // ws.onerror = event => {
+    //   console.log('WebSocket error:', event);
+    // };
 
     ws.onmessage = event => {
       const resp = JSON.parse(event.data);
@@ -1103,7 +1149,6 @@ export default function HomePage() {
         if (resp.type === 'Asking Card') {
           setFromPerson(resp.fromPerson);
           setToPerson(resp.toPerson);
-          setCardAsked(resp.card);
           let spliting = resp.card.split('of');
           setAskedCardRank(spliting[0]);
           setAskedCardSuit(spliting[1]);
@@ -1292,7 +1337,6 @@ export default function HomePage() {
           setResponseForTheCard('');
           setFromPerson('');
           setToPerson('');
-          setCardAsked('');
         }
 
         if (
@@ -1910,7 +1954,6 @@ export default function HomePage() {
           setAskedCardSuit('');
           setAskedCardRank('');
           setResponseForTheCard('');
-          setCardAsked('');
           setToPerson('');
           setFromPerson('');
           setTurnMessage('');
@@ -1997,7 +2040,7 @@ export default function HomePage() {
 
   const fetchParticipants = async id => {
     await axios
-      .get(`http://13.71.92.130:5000/get-participants/${id}`)
+      .get(`http://10.0.2.2:5000/get-participants/${id}`)
       .then(response => {
         const participants = response.data;
         setParticipants(participants);
@@ -2010,17 +2053,17 @@ export default function HomePage() {
 
   const createRoomServer = async () => {
     try {
-      const response = await axios.post('http://13.71.92.130:5000/create-room');
+      const response = await axios.post('http://10.0.2.2:5000/create-room');
       if (response.data.roomId) {
         roomId = response.data.roomId;
         setMessage(`RoomId : ${response.data.roomId}`);
         try {
           name = 'host';
           if (roomId !== '') {
-            const resp = await axios.post(
-              'http://13.71.92.130:5000/join-room',
-              {roomId, name},
-            );
+            const resp = await axios.post('http://10.0.2.2:5000/join-room', {
+              roomId,
+              name,
+            });
             if (resp.status === 200) {
               setCreateRoom(true);
             }
@@ -2050,7 +2093,7 @@ export default function HomePage() {
       });
     } else if (roomId !== '') {
       const response = await axios.get(
-        `http://13.71.92.130:5000/get-participants/${roomId}`,
+        `http://10.0.2.2:5000/get-participants/${roomId}`,
       );
       if (response.data) {
         let members = response.data;
@@ -2087,7 +2130,7 @@ export default function HomePage() {
         } else {
           try {
             const response = await axios.post(
-              'http://13.71.92.130:5000/join-room',
+              'http://10.0.2.2:5000/join-room',
               {roomId, name},
             );
             if (response.status === 200) {
@@ -2115,7 +2158,7 @@ export default function HomePage() {
   const leaveRoomServer = async () => {
     try {
       type = 'leave';
-      const response = await axios.post('http://13.71.92.130:5000/leave-room', {
+      const response = await axios.post('http://10.0.2.2:5000/leave-room', {
         roomId,
         name,
         type,
@@ -2155,10 +2198,11 @@ export default function HomePage() {
       try {
         let name = playerToBeKicked;
         type = 'kick';
-        const response = await axios.post(
-          'http://13.71.92.130:5000/leave-room',
-          {roomId, name, type},
-        );
+        const response = await axios.post('http://10.0.2.2:5000/leave-room', {
+          roomId,
+          name,
+          type,
+        });
         if (response.status === 200) {
           setPlayerToBeKicked('');
           setModalVisible(!isModalVisible);
@@ -2182,7 +2226,7 @@ export default function HomePage() {
   const deleteRoom = async () => {
     try {
       const response = await axios.delete(
-        `http://13.71.92.130:5000/delete-room/${roomId}`,
+        `http://10.0.2.2:5000/delete-room/${roomId}`,
       );
       setActiveGameTab(null);
       gameSelected = '';
@@ -2822,14 +2866,19 @@ export default function HomePage() {
         !joinRoom &&
         !gameScreen &&
         !endGameScreen &&
-        !gameSelectionScreen && (
+        !gameSelectionScreen &&
+        !rulesScreen && (
           <View style={styles.container1}>
             <View style={styles.roomContainer1}>
-              <TouchableOpacity style={styles.button}>
-                <Text style={styles.buttonText}>How To Play ?</Text>
+              <TouchableOpacity
+                style={styles.button}
+                onPress={() => {
+                  setRulesScreen(true);
+                }}>
+                <Text style={styles.buttonText}>GameRules</Text>
               </TouchableOpacity>
               <TouchableOpacity style={styles.button} onPress={handleLogout}>
-                <Text style={styles.buttonText}>Logout</Text>
+                <Text style={styles.buttonText}>Exit Game</Text>
               </TouchableOpacity>
             </View>
             <View style={styles.roomContainer2}>
@@ -2850,6 +2899,118 @@ export default function HomePage() {
             </View>
           </View>
         )}
+      {rulesScreen && (
+        <View style={styles.flex}>
+          <ScrollView style={{display: 'flex', flex: 0.7}}>
+            <View
+              style={{
+                marginTop: 10,
+                marginBottom: 10,
+                marginLeft: 20,
+                marginRight: 20,
+              }}>
+              <Text
+                style={{
+                  fontSize: 20,
+                  fontWeight: 'bold',
+                  alignSelf: 'center',
+                  color: 'orange',
+                  marginBottom: 10,
+                }}>
+                Memory
+              </Text>
+              {MemoryRules.map((rule, index) => {
+                return (
+                  <Text key={index} style={{color: 'white', fontSize: 16}}>
+                    🙄 {rule}
+                  </Text>
+                );
+              })}
+            </View>
+            <View
+              style={{
+                borderBottomColor: 'gray',
+                borderBottomWidth: 1,
+                marginTop: 5,
+              }}
+            />
+            <View
+              style={{
+                marginTop: 10,
+                marginBottom: 10,
+                marginLeft: 20,
+                marginRight: 20,
+              }}>
+              <Text
+                style={{
+                  fontSize: 20,
+                  fontWeight: 'bold',
+                  alignSelf: 'center',
+                  color: 'orange',
+                  marginBottom: 10,
+                }}>
+                Ace
+              </Text>
+              {AceRules.map((rule, index) => {
+                return (
+                  <Text key={index} style={{color: 'white', fontSize: 16}}>
+                    🙄 {rule}
+                  </Text>
+                );
+              })}
+            </View>
+            <View
+              style={{
+                borderBottomColor: 'gray',
+                borderBottomWidth: 1,
+                marginTop: 5,
+              }}
+            />
+            <View
+              style={{
+                marginTop: 10,
+                marginBottom: 10,
+                marginLeft: 20,
+                marginRight: 20,
+              }}>
+              <Text
+                style={{
+                  fontSize: 20,
+                  fontWeight: 'bold',
+                  alignSelf: 'center',
+                  color: 'orange',
+                  marginBottom: 10,
+                }}>
+                Jack And Five
+              </Text>
+              {JackAndFiveRules.map((rule, index) => {
+                return (
+                  <Text key={index} style={{color: 'white', fontSize: 16}}>
+                    🙄 {rule}
+                  </Text>
+                );
+              })}
+            </View>
+            <View
+              style={{
+                borderBottomColor: 'gray',
+                borderBottomWidth: 1,
+                marginTop: 5,
+              }}
+            />
+          </ScrollView>
+          <TouchableOpacity
+            style={[
+              styles.button,
+              {alignSelf: 'center', marginTop: 10, marginBottom: 10},
+            ]}
+            onPress={() => {
+              setRulesScreen(false);
+            }}>
+            <Text style={styles.buttonText}>Back</Text>
+          </TouchableOpacity>
+        </View>
+      )}
       {gameSelectionScreen && (
         <Modal
           isVisible={gameSelectionScreen}
