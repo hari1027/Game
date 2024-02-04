@@ -9,6 +9,7 @@ import {
   ScrollView,
   TouchableWithoutFeedback,
   FlatList,
+  BackHandler,
 } from 'react-native';
 import React, {useState, useEffect} from 'react';
 import spadeImage from './spade.jpg';
@@ -2009,7 +2010,9 @@ export default function HomePage() {
     };
   }, []);
 
-  const handleLogout = () => {};
+  const handleLogout = () => {
+    BackHandler.exitApp();
+  };
 
   const handleExit = () => {
     if (createRoom) {
