@@ -144,7 +144,7 @@ export default function HomePage() {
   };
 
   // Establish a WebSocket connection when the component mounts
-  const ws = new WebSocket('ws://10.0.2.2:5000');
+  const ws = new WebSocket('wss://game-server-production-35dd.up.railway.app');
 
   const minorSpades = [
     '2 of Spades',
@@ -2043,7 +2043,7 @@ export default function HomePage() {
 
   const fetchParticipants = async id => {
     await axios
-      .get(`http://10.0.2.2:5000/get-participants/${id}`)
+      .get(`https://game-server-production-35dd.up.railway.app/get-participants/${id}`)
       .then(response => {
         const participants = response.data;
         setParticipants(participants);
@@ -2056,14 +2056,14 @@ export default function HomePage() {
 
   const createRoomServer = async () => {
     try {
-      const response = await axios.post('http://10.0.2.2:5000/create-room');
+      const response = await axios.post('https://game-server-production-35dd.up.railway.app/create-room');
       if (response.data.roomId) {
         roomId = response.data.roomId;
         setMessage(`RoomId : ${response.data.roomId}`);
         try {
           name = 'host';
           if (roomId !== '') {
-            const resp = await axios.post('http://10.0.2.2:5000/join-room', {
+            const resp = await axios.post('https://game-server-production-35dd.up.railway.app/join-room', {
               roomId,
               name,
             });
@@ -2096,7 +2096,7 @@ export default function HomePage() {
       });
     } else if (roomId !== '') {
       const response = await axios.get(
-        `http://10.0.2.2:5000/get-participants/${roomId}`,
+        `https://game-server-production-35dd.up.railway.app/get-participants/${roomId}`,
       );
       if (response.data) {
         let members = response.data;
@@ -2133,7 +2133,7 @@ export default function HomePage() {
         } else {
           try {
             const response = await axios.post(
-              'http://10.0.2.2:5000/join-room',
+              'https://game-server-production-35dd.up.railway.app/join-room',
               {roomId, name},
             );
             if (response.status === 200) {
@@ -2161,7 +2161,7 @@ export default function HomePage() {
   const leaveRoomServer = async () => {
     try {
       type = 'leave';
-      const response = await axios.post('http://10.0.2.2:5000/leave-room', {
+      const response = await axios.post('https://game-server-production-35dd.up.railway.app/leave-room', {
         roomId,
         name,
         type,
@@ -2201,7 +2201,7 @@ export default function HomePage() {
       try {
         let name = playerToBeKicked;
         type = 'kick';
-        const response = await axios.post('http://10.0.2.2:5000/leave-room', {
+        const response = await axios.post('https://game-server-production-35dd.up.railway.app/leave-room', {
           roomId,
           name,
           type,
@@ -2229,7 +2229,7 @@ export default function HomePage() {
   const deleteRoom = async () => {
     try {
       const response = await axios.delete(
-        `http://10.0.2.2:5000/delete-room/${roomId}`,
+        `https://game-server-production-35dd.up.railway.app/delete-room/${roomId}`,
       );
       setActiveGameTab(null);
       gameSelected = '';
