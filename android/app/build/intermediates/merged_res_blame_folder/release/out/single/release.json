@@ -1,0 +1,62 @@
+[
+    {
+        "merged": "com.game.app-merged_res-30:/mipmap-mdpi_ic_launcher.png.flat",
+        "source": "com.game.app-main-31:/mipmap-mdpi/ic_launcher.png"
+    },
+    {
+        "merged": "com.game.app-merged_res-30:/mipmap-hdpi_ic_launcher_round.png.flat",
+        "source": "com.game.app-main-31:/mipmap-hdpi/ic_launcher_round.png"
+    },
+    {
+        "merged": "com.game.app-merged_res-30:/mipmap-xxhdpi_ic_launcher_round.png.flat",
+        "source": "com.game.app-main-31:/mipmap-xxhdpi/ic_launcher_round.png"
+    },
+    {
+        "merged": "com.game.app-merged_res-30:/mipmap-hdpi_ic_launcher.png.flat",
+        "source": "com.game.app-main-31:/mipmap-hdpi/ic_launcher.png"
+    },
+    {
+        "merged": "com.game.app-merged_res-30:/drawable-mdpi_gamecomponents_heart.jpg.flat",
+        "source": "com.game.app-res-24:/drawable-mdpi/gamecomponents_heart.jpg"
+    },
+    {
+        "merged": "com.game.app-merged_res-30:/drawable-mdpi_gamecomponents_diamond.jpg.flat",
+        "source": "com.game.app-res-24:/drawable-mdpi/gamecomponents_diamond.jpg"
+    },
+    {
+        "merged": "com.game.app-merged_res-30:/mipmap-xxxhdpi_ic_launcher.png.flat",
+        "source": "com.game.app-main-31:/mipmap-xxxhdpi/ic_launcher.png"
+    },
+    {
+        "merged": "com.game.app-merged_res-30:/mipmap-xxxhdpi_ic_launcher_round.png.flat",
+        "source": "com.game.app-main-31:/mipmap-xxxhdpi/ic_launcher_round.png"
+    },
+    {
+        "merged": "com.game.app-merged_res-30:/drawable-mdpi_gamecomponents_club.jpg.flat",
+        "source": "com.game.app-res-24:/drawable-mdpi/gamecomponents_club.jpg"
+    },
+    {
+        "merged": "com.game.app-merged_res-30:/mipmap-xhdpi_ic_launcher_round.png.flat",
+        "source": "com.game.app-main-31:/mipmap-xhdpi/ic_launcher_round.png"
+    },
+    {
+        "merged": "com.game.app-merged_res-30:/mipmap-xxhdpi_ic_launcher.png.flat",
+        "source": "com.game.app-main-31:/mipmap-xxhdpi/ic_launcher.png"
+    },
+    {
+        "merged": "com.game.app-merged_res-30:/mipmap-mdpi_ic_launcher_round.png.flat",
+        "source": "com.game.app-main-31:/mipmap-mdpi/ic_launcher_round.png"
+    },
+    {
+        "merged": "com.game.app-merged_res-30:/drawable_rn_edit_text_material.xml.flat",
+        "source": "com.game.app-main-31:/drawable/rn_edit_text_material.xml"
+    },
+    {
+        "merged": "com.game.app-merged_res-30:/mipmap-xhdpi_ic_launcher.png.flat",
+        "source": "com.game.app-main-31:/mipmap-xhdpi/ic_launcher.png"
+    },
+    {
+        "merged": "com.game.app-merged_res-30:/drawable-mdpi_gamecomponents_spade.jpg.flat",
+        "source": "com.game.app-res-24:/drawable-mdpi/gamecomponents_spade.jpg"
+    }
+]

@@ -1,0 +1,89 @@
+1<?xml version="1.0" encoding="utf-8"?>
+2<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+3    package="com.game"
+4    android:versionCode="1"
+5    android:versionName="1.0" >
+6
+7    <uses-sdk
+8        android:minSdkVersion="21"
+8-->C:\Users\hari0\OneDrive\Documents\Game\android\app\src\main\AndroidManifest.xml
+9        android:targetSdkVersion="34" />
+9-->C:\Users\hari0\OneDrive\Documents\Game\android\app\src\main\AndroidManifest.xml
+10
+11    <uses-permission android:name="android.permission.INTERNET" />
+11-->C:\Users\hari0\OneDrive\Documents\Game\android\app\src\main\AndroidManifest.xml:3:3-65
+11-->C:\Users\hari0\OneDrive\Documents\Game\android\app\src\main\AndroidManifest.xml:3:20-62
+12
+13    <application
+13-->C:\Users\hari0\OneDrive\Documents\Game\android\app\src\main\AndroidManifest.xml:5:3-24:17
+14        android:name="com.game.MainApplication"
+14-->C:\Users\hari0\OneDrive\Documents\Game\android\app\src\main\AndroidManifest.xml:6:5-36
+15        android:allowBackup="false"
+15-->C:\Users\hari0\OneDrive\Documents\Game\android\app\src\main\AndroidManifest.xml:10:5-32
+16        android:appComponentFactory="androidx.core.app.CoreComponentFactory"
+16-->[androidx.core:core:1.7.0] C:\Users\hari0\.gradle\caches\transforms-3\75e4635b66fa4e4e84e71b52579837ce\transformed\core-1.7.0\AndroidManifest.xml:24:18-86
+17        android:icon="@mipmap/ic_launcher"
+17-->C:\Users\hari0\OneDrive\Documents\Game\android\app\src\main\AndroidManifest.xml:8:5-39
+18        android:label="@string/app_name"
+18-->C:\Users\hari0\OneDrive\Documents\Game\android\app\src\main\AndroidManifest.xml:7:5-37
+19        android:roundIcon="@mipmap/ic_launcher_round"
+19-->C:\Users\hari0\OneDrive\Documents\Game\android\app\src\main\AndroidManifest.xml:9:5-50
+20        android:theme="@style/AppTheme" >
+20-->C:\Users\hari0\OneDrive\Documents\Game\android\app\src\main\AndroidManifest.xml:11:5-36
+21        <activity
+21-->C:\Users\hari0\OneDrive\Documents\Game\android\app\src\main\AndroidManifest.xml:12:5-23:16
+22            android:name="com.game.MainActivity"
+22-->C:\Users\hari0\OneDrive\Documents\Game\android\app\src\main\AndroidManifest.xml:13:7-35
+23            android:configChanges="keyboard|keyboardHidden|orientation|screenLayout|screenSize|smallestScreenSize|uiMode"
+23-->C:\Users\hari0\OneDrive\Documents\Game\android\app\src\main\AndroidManifest.xml:15:7-116
+24            android:exported="true"
+24-->C:\Users\hari0\OneDrive\Documents\Game\android\app\src\main\AndroidManifest.xml:18:7-30
+25            android:label="@string/app_name"
+25-->C:\Users\hari0\OneDrive\Documents\Game\android\app\src\main\AndroidManifest.xml:14:7-39
+26            android:launchMode="singleTask"
+26-->C:\Users\hari0\OneDrive\Documents\Game\android\app\src\main\AndroidManifest.xml:16:7-38
+27            android:windowSoftInputMode="adjustResize" >
+27-->C:\Users\hari0\OneDrive\Documents\Game\android\app\src\main\AndroidManifest.xml:17:7-49
+28            <intent-filter>
+28-->C:\Users\hari0\OneDrive\Documents\Game\android\app\src\main\AndroidManifest.xml:19:7-22:23
+29                <action android:name="android.intent.action.MAIN" />
+29-->C:\Users\hari0\OneDrive\Documents\Game\android\app\src\main\AndroidManifest.xml:20:9-61
+29-->C:\Users\hari0\OneDrive\Documents\Game\android\app\src\main\AndroidManifest.xml:20:17-58
+30
+31                <category android:name="android.intent.category.LAUNCHER" />
+31-->C:\Users\hari0\OneDrive\Documents\Game\android\app\src\main\AndroidManifest.xml:21:9-69
+31-->C:\Users\hari0\OneDrive\Documents\Game\android\app\src\main\AndroidManifest.xml:21:19-66
+32            </intent-filter>
+33        </activity>
+34
+35        <provider
+35-->[androidx.emoji2:emoji2:1.0.0] C:\Users\hari0\.gradle\caches\transforms-3\223146ef33e3aa619e8b04649706e145\transformed\jetified-emoji2-1.0.0\AndroidManifest.xml:26:9-34:20
+36            android:name="androidx.startup.InitializationProvider"
+36-->[androidx.emoji2:emoji2:1.0.0] C:\Users\hari0\.gradle\caches\transforms-3\223146ef33e3aa619e8b04649706e145\transformed\jetified-emoji2-1.0.0\AndroidManifest.xml:27:13-67
+37            android:authorities="com.game.androidx-startup"
+37-->[androidx.emoji2:emoji2:1.0.0] C:\Users\hari0\.gradle\caches\transforms-3\223146ef33e3aa619e8b04649706e145\transformed\jetified-emoji2-1.0.0\AndroidManifest.xml:28:13-68
+38            android:exported="false" >
+38-->[androidx.emoji2:emoji2:1.0.0] C:\Users\hari0\.gradle\caches\transforms-3\223146ef33e3aa619e8b04649706e145\transformed\jetified-emoji2-1.0.0\AndroidManifest.xml:29:13-37
+39            <meta-data
+39-->[androidx.emoji2:emoji2:1.0.0] C:\Users\hari0\.gradle\caches\transforms-3\223146ef33e3aa619e8b04649706e145\transformed\jetified-emoji2-1.0.0\AndroidManifest.xml:31:13-33:52
+40                android:name="androidx.emoji2.text.EmojiCompatInitializer"
+40-->[androidx.emoji2:emoji2:1.0.0] C:\Users\hari0\.gradle\caches\transforms-3\223146ef33e3aa619e8b04649706e145\transformed\jetified-emoji2-1.0.0\AndroidManifest.xml:32:17-75
+41                android:value="androidx.startup" />
+41-->[androidx.emoji2:emoji2:1.0.0] C:\Users\hari0\.gradle\caches\transforms-3\223146ef33e3aa619e8b04649706e145\transformed\jetified-emoji2-1.0.0\AndroidManifest.xml:33:17-49
+42            <meta-data
+42-->[androidx.lifecycle:lifecycle-process:2.4.0] C:\Users\hari0\.gradle\caches\transforms-3\d5d05479173d466a6bd0989b3b3e5ef4\transformed\jetified-lifecycle-process-2.4.0\AndroidManifest.xml:31:13-33:52
+43                android:name="androidx.lifecycle.ProcessLifecycleInitializer"
+43-->[androidx.lifecycle:lifecycle-process:2.4.0] C:\Users\hari0\.gradle\caches\transforms-3\d5d05479173d466a6bd0989b3b3e5ef4\transformed\jetified-lifecycle-process-2.4.0\AndroidManifest.xml:32:17-78
+44                android:value="androidx.startup" />
+44-->[androidx.lifecycle:lifecycle-process:2.4.0] C:\Users\hari0\.gradle\caches\transforms-3\d5d05479173d466a6bd0989b3b3e5ef4\transformed\jetified-lifecycle-process-2.4.0\AndroidManifest.xml:33:17-49
+45        </provider>
+46
+47        <meta-data
+47-->[com.facebook.soloader:soloader:0.10.5] C:\Users\hari0\.gradle\caches\transforms-3\ec3312a013bd7d8a70466a1977a1dba4\transformed\jetified-soloader-0.10.5\AndroidManifest.xml:12:9-14:37
+48            android:name="com.facebook.soloader.enabled"
+48-->[com.facebook.soloader:soloader:0.10.5] C:\Users\hari0\.gradle\caches\transforms-3\ec3312a013bd7d8a70466a1977a1dba4\transformed\jetified-soloader-0.10.5\AndroidManifest.xml:13:13-57
+49            android:value="false" />
+49-->[com.facebook.soloader:soloader:0.10.5] C:\Users\hari0\.gradle\caches\transforms-3\ec3312a013bd7d8a70466a1977a1dba4\transformed\jetified-soloader-0.10.5\AndroidManifest.xml:14:13-34
+50    </application>
+51
+52</manifest>
