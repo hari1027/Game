@@ -2043,7 +2043,7 @@ export default function HomePage() {
 
   const fetchParticipants = async id => {
     await axios
-      .get(`https://game-server-production-35dd.up.railway.app/get-participants/${id}`)
+      .get(`game-server-production-2891.up.railway.app/get-participants/${id}`)
       .then(response => {
         const participants = response.data;
         setParticipants(participants);
@@ -2056,17 +2056,22 @@ export default function HomePage() {
 
   const createRoomServer = async () => {
     try {
-      const response = await axios.post('https://game-server-production-35dd.up.railway.app/create-room');
+      const response = await axios.post(
+        'game-server-production-2891.up.railway.app/create-room',
+      );
       if (response.data.roomId) {
         roomId = response.data.roomId;
         setMessage(`RoomId : ${response.data.roomId}`);
         try {
           name = 'host';
           if (roomId !== '') {
-            const resp = await axios.post('https://game-server-production-35dd.up.railway.app/join-room', {
-              roomId,
-              name,
-            });
+            const resp = await axios.post(
+              'game-server-production-2891.up.railway.app/join-room',
+              {
+                roomId,
+                name,
+              },
+            );
             if (resp.status === 200) {
               setCreateRoom(true);
             }
@@ -2096,7 +2101,7 @@ export default function HomePage() {
       });
     } else if (roomId !== '') {
       const response = await axios.get(
-        `https://game-server-production-35dd.up.railway.app/get-participants/${roomId}`,
+        `game-server-production-2891.up.railway.app/get-participants/${roomId}`,
       );
       if (response.data) {
         let members = response.data;
@@ -2133,7 +2138,7 @@ export default function HomePage() {
         } else {
           try {
             const response = await axios.post(
-              'https://game-server-production-35dd.up.railway.app/join-room',
+              'game-server-production-2891.up.railway.app/join-room',
               {roomId, name},
             );
             if (response.status === 200) {
@@ -2161,11 +2166,14 @@ export default function HomePage() {
   const leaveRoomServer = async () => {
     try {
       type = 'leave';
-      const response = await axios.post('https://game-server-production-35dd.up.railway.app/leave-room', {
-        roomId,
-        name,
-        type,
-      });
+      const response = await axios.post(
+        'game-server-production-2891.up.railway.app/leave-room',
+        {
+          roomId,
+          name,
+          type,
+        },
+      );
       if (response.status === 200) {
         setJoinRoom(false);
         setJoinedRoom(false);
@@ -2201,11 +2209,14 @@ export default function HomePage() {
       try {
         let name = playerToBeKicked;
         type = 'kick';
-        const response = await axios.post('https://game-server-production-35dd.up.railway.app/leave-room', {
-          roomId,
-          name,
-          type,
-        });
+        const response = await axios.post(
+          'game-server-production-2891.up.railway.app/leave-room',
+          {
+            roomId,
+            name,
+            type,
+          },
+        );
         if (response.status === 200) {
           setPlayerToBeKicked('');
           setModalVisible(!isModalVisible);
@@ -2229,7 +2240,7 @@ export default function HomePage() {
   const deleteRoom = async () => {
     try {
       const response = await axios.delete(
-        `https://game-server-production-35dd.up.railway.app/delete-room/${roomId}`,
+        `game-server-production-2891.up.railway.app/delete-room/${roomId}`,
       );
       setActiveGameTab(null);
       gameSelected = '';
